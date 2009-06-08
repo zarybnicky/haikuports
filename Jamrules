@@ -1,0 +1,47 @@
+# Experimental rules for building Haiku ports
+# Author: Andreas Färber <andreas.faerber@web.de>
+
+rule PortDepends port : dependency {
+	Port $(dependency) ;
+	Depends $(port) : $(dependency) ;
+}
+
+rule BuildPort port
+{
+	Port $(port) ;
+	Depends all : $(port) ;
+}
+
+rule Port port
+{
+	NotFile $(port) ;
+	Always $(dependency) ;
+	BUILDDIR on $(port) ?= $(BUILDROOT)/$(port) ;
+}
+
+CONFIGURE ?= configure ;
+
+actions Configure
+{
+	mkdir -p "$(BUILDDIR)"
+	cd "$(BUILDDIR)" && $(SRCDIR)/$(CONFIGURE) --prefix=$(PREFIX) $(CONFIGUREFLAGS)
+}
+
+MAKE ?= make ;
+if $(OS) != HAIKU {
+	MAKEFLAGS = DESTDIR=/path/to/fakeroot ;
+}
+
+actions Make
+{
+	cd "$(BUILDDIR)" && $(MAKE) $(MAKEFLAGS)
+}
+actions ignore MakeIgnored
+{
+	cd "$(BUILDDIR)" && $(MAKE) $(MAKEFLAGS)
+}
+
+actions MakeInstall
+{
+	cd "$(BUILDDIR)" && $(MAKE) install $(MAKEFLAGS)
+}

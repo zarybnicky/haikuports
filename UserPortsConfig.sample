@@ -1,0 +1,7 @@
+SRCDIR on dev-libs/expat = /path/to/expat/sources ;
+SRCDIR on net-misc/curl = /path/to/curl/sources ;
+BUILDDIR on dev-util/git = /path/to/git/sources ;
+
+#BuildPort dev-libs/expat ;
+#BuildPort net-misc/curl ;
+BuildPort dev-util/git ;

@@ -1,0 +1,10 @@
+SubDir TOP ;
+
+PREFIX = /boot/common ;
+BUILDROOT = \$HOME ;
+
+SubInclude TOP dev-libs ;
+SubInclude TOP dev-util ;
+SubInclude TOP net-misc ;
+
+include UserPortsConfig ;

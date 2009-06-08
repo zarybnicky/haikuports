@@ -1,0 +1,10 @@
+SubDir TOP net-misc curl ;
+
+PortDepends net-misc/curl : dev-libs/expat ;
+
+CONFIGUREFLAGS on net-misc/curl = --with-ssl=/boot/common ;
+Configure net-misc/curl ;
+
+Make net-misc/curl ;
+
+MakeInstall net-misc/curl ;

@@ -1,0 +1,24 @@
+SubDir TOP dev-util git ;
+
+PortDepends dev-util/git : net-misc/curl ;
+
+MAKEFLAGS on dev-util/git = $(MAKEFLAGS)
+prefix=$(PREFIX)
+NO_R_TO_GCC_LINKER=YesPlease
+NO_MEMMEM=YesPlease
+NO_MKDTEMP=YesPlease
+NO_MKSTEMPS=YesPlease
+NO_IPV6=YesPlease
+NO_TCLTK=YesPlease
+NEEDS_LIBICONV=YesPlease
+PTHREAD_LIBS=
+CURLDIR=$(PREFIX)
+PERL_PATH=`which perl`
+CFLAGS=\"-g -O2 -I/boot/develop/headers/3rdparty -I/boot/common/include\"
+LDFLAGS=\"-L/boot/common/lib -lnetwork -lbsd\"
+;
+
+MakeIgnored dev-util/git ;
+Make dev-util/git ;
+
+MakeInstall dev-util/git ;

@@ -1,0 +1,7 @@
+SubDir TOP dev-libs expat ;
+
+Configure dev-libs/expat ;
+
+Make dev-libs/expat ;
+
+MakeInstall dev-libs/expat ;
