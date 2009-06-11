@@ -1,5 +1,6 @@
 SubDir TOP dev-util git ;
 
+PortDepends dev-util/git : dev-libs/expat ;
 PortDepends dev-util/git : net-misc/curl ;
 
 MAKEFLAGS on dev-util/git = $(MAKEFLAGS)
@@ -12,10 +13,12 @@ NO_IPV6=YesPlease
 NO_TCLTK=YesPlease
 NEEDS_LIBICONV=YesPlease
 PTHREAD_LIBS=
-CURLDIR=$(PREFIX)
-PERL_PATH=`which perl`
-CFLAGS=\"-g -O2 -I/boot/develop/headers/3rdparty -I/boot/common/include\"
-LDFLAGS=\"-L/boot/common/lib -lnetwork -lbsd\"
+CURLDIR=$(DESTDIR)$(PREFIX)
+PERL_PATH=/boot/common/bin/perl
+CFLAGS=\"-g -O2 $(CPPFLAGS) $(CFLAGS) -I/boot/develop/headers/3rdparty -I$(DESTDIR)$(PREFIX)/include\"
+LDFLAGS=\"$(LDFLAGS:J=" ") -L$(DESTDIR)$(PREFIX)/lib -lnetwork -lbsd\"
+CC=\"$(CC)\"
+NO_OPENSSL=YesPlease #XXX
 ;
 
 MakeIgnored dev-util/git ;

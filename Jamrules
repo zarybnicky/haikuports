@@ -15,7 +15,7 @@ rule BuildPort port
 rule Port port
 {
 	NotFile $(port) ;
-	Always $(dependency) ;
+	Always $(port) ;
 	BUILDDIR on $(port) ?= $(BUILDROOT)/$(port) ;
 }
 
@@ -25,7 +25,7 @@ actions Configure
 {
 	mkdir -p "$(BUILDDIR)"
 	cd "$(BUILDDIR)" && \
-	PATH=$PATH:$(PATH:J=:) $(SRCDIR)/$(CONFIGURE) $(CONFIGUREFLAGS_ARCH) --prefix=$(PREFIX) $(CONFIGUREFLAGS)
+	PATH=$PATH:$(PATH:J=:) $(SRCDIR)/$(CONFIGURE) $(CONFIGUREFLAGS)
 }
 
 MAKE ?= make ;
