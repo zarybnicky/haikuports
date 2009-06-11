@@ -24,24 +24,25 @@ CONFIGURE ?= configure ;
 actions Configure
 {
 	mkdir -p "$(BUILDDIR)"
-	cd "$(BUILDDIR)" && $(SRCDIR)/$(CONFIGURE) --prefix=$(PREFIX) $(CONFIGUREFLAGS)
+	cd "$(BUILDDIR)" && \
+	PATH=$PATH:$(PATH:J=:) $(SRCDIR)/$(CONFIGURE) $(CONFIGUREFLAGS_ARCH) --prefix=$(PREFIX) $(CONFIGUREFLAGS)
 }
 
 MAKE ?= make ;
-if $(OS) != HAIKU {
-	MAKEFLAGS = DESTDIR=/path/to/fakeroot ;
-}
 
 actions Make
 {
-	cd "$(BUILDDIR)" && $(MAKE) $(MAKEFLAGS)
+	cd "$(BUILDDIR)" && \
+	PATH=$PATH:$(PATH:J=:) $(MAKE) $(MAKEFLAGS)
 }
 actions ignore MakeIgnored
 {
-	cd "$(BUILDDIR)" && $(MAKE) $(MAKEFLAGS)
+	cd "$(BUILDDIR)" && \
+	PATH=$PATH:$(PATH:J=:) $(MAKE) $(MAKEFLAGS)
 }
 
 actions MakeInstall
 {
-	cd "$(BUILDDIR)" && $(MAKE) install $(MAKEFLAGS)
+	cd "$(BUILDDIR)" && \
+	PATH=$PATH:$(PATH:J=:) $(MAKE) install $(MAKEFLAGS)
 }

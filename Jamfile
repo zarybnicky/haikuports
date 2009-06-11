@@ -3,8 +3,43 @@ SubDir TOP ;
 PREFIX = /boot/common ;
 BUILDROOT = \$HOME ;
 
+include UserPortsConfig ;
+
+if $(OS) != HAIKU {
+	MAKEFLAGS += DESTDIR=$(DESTDIR) ;
+	CONFIGUREFLAGS_ARCH = --host=i586-pc-haiku ;
+	CPPFLAGS = 
+		-I$(HAIKUDIR)/headers/posix
+		-I$(HAIKUDIR)/headers/gnu
+		-I$(HAIKUDIR)/headers/glibc
+		-I$(HAIKUDIR)/headers/os
+		-I$(HAIKUDIR)/headers/os/app
+		-I$(HAIKUDIR)/headers/os/device
+		-I$(HAIKUDIR)/headers/os/drivers
+		-I$(HAIKUDIR)/headers/os/game
+		-I$(HAIKUDIR)/headers/os/interface
+		-I$(HAIKUDIR)/headers/os/kernel
+		-I$(HAIKUDIR)/headers/os/media
+		-I$(HAIKUDIR)/headers/os/mail
+		-I$(HAIKUDIR)/headers/os/midi
+		-I$(HAIKUDIR)/headers/os/midi2
+		-I$(HAIKUDIR)/headers/os/net
+		-I$(HAIKUDIR)/headers/os/opengl
+		-I$(HAIKUDIR)/headers/os/storage
+		-I$(HAIKUDIR)/headers/os/support
+		-I$(HAIKUDIR)/headers/os/translation
+#		-I$(HAIKUDIR)/headers/compatilibity/bsd
+		$(CPPFLAGS) ;
+	LDFLAGS =
+		-B$(HAIKUBUILDDIR)/objects/haiku/x86/release/system/glue
+		-B$(HAIKUBUILDDIR)/objects/haiku/x86/release/system/glue/arch/x86
+		-L$(HAIKUBUILDDIR)/objects/haiku/x86/release/system/libroot
+		-L$(HAIKUBUILDDIR)/objects/haiku/x86/release/kits
+		$(LDFLAGS) ;
+}
+CONFIGUREFLAGS ?= CPPFLAGS=\"$(CPPFLAGS:J=" ")\" XCFLAGS=\"$(CFLAGS:J=" ")\" CXXFLAGS=\"$(CXXFLAGS:J=" ")\" LDFLAGS=\"$(LDFLAGS:J=" ")\" ;
+
 SubInclude TOP dev-libs ;
 SubInclude TOP dev-util ;
 SubInclude TOP net-misc ;
 
-include UserPortsConfig ;
