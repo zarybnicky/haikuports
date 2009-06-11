@@ -25,7 +25,8 @@ actions Configure
 {
 	mkdir -p "$(BUILDDIR)"
 	cd "$(BUILDDIR)" && \
-	PATH=$PATH:$(PATH:J=:) $(SRCDIR)/$(CONFIGURE) $(CONFIGUREFLAGS)
+	PATH=$PATH:$(PATH) \
+	$(SRCDIR)/$(CONFIGURE) $(CONFIGUREFLAGS)
 }
 
 MAKE ?= make ;
@@ -33,16 +34,19 @@ MAKE ?= make ;
 actions Make
 {
 	cd "$(BUILDDIR)" && \
-	PATH=$PATH:$(PATH:J=:) $(MAKE) $(MAKEFLAGS)
+	PATH=$PATH:$(PATH) \
+	$(MAKE) $(MAKEFLAGS)
 }
 actions ignore MakeIgnored
 {
 	cd "$(BUILDDIR)" && \
-	PATH=$PATH:$(PATH:J=:) $(MAKE) $(MAKEFLAGS)
+	PATH=$PATH:$(PATH) \
+	$(MAKE) $(MAKEFLAGS)
 }
 
 actions MakeInstall
 {
 	cd "$(BUILDDIR)" && \
-	PATH=$PATH:$(PATH:J=:) $(MAKE) install $(MAKEFLAGS)
+	PATH=$PATH:$(PATH) \
+	$(MAKE) install $(MAKEFLAGS)
 }
