@@ -28,13 +28,14 @@ if $(OS) != HAIKU {
 		-I$(HAIKUDIR)/headers/os/storage
 		-I$(HAIKUDIR)/headers/os/support
 		-I$(HAIKUDIR)/headers/os/translation
-#		-I$(HAIKUDIR)/headers/compatilibity/bsd
+#		-I$(HAIKUDIR)/headers/compatibility/bsd
 		$(CPPFLAGS) ;
 	LDFLAGS =
 		-B$(HAIKUBUILDDIR)/objects/haiku/x86/release/system/glue
 		-B$(HAIKUBUILDDIR)/objects/haiku/x86/release/system/glue/arch/x86
 		-L$(HAIKUBUILDDIR)/objects/haiku/x86/release/system/libroot
 		-L$(HAIKUBUILDDIR)/objects/haiku/x86/release/kits
+		-L$(HAIKUBUILDDIR)/objects/haiku/x86/release/kits/network
 		$(LDFLAGS) ;
 }
 CONFIGUREFLAGS ?= CPPFLAGS=\"$(CPPFLAGS:J=" ")\" XCFLAGS=\"$(CFLAGS:J=" ")\" CXXFLAGS=\"$(CXXFLAGS:J=" ")\" LDFLAGS=\"$(LDFLAGS:J=" ")\" ;
