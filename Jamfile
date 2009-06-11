@@ -43,17 +43,30 @@ if $(OS) != HAIKU {
 		$(HAIKUBUILDDIR)/objects/haiku/x86/release/libs/iconv
 		$(HAIKUBUILDDIR)/objects/haiku/x86/release/libs/zlib
 	;
-	CC = i586-pc-haiku-gcc -B$(STUBDIRS) ;
+	CC = i586-pc-haiku-gcc ;
+	CC += -B$(STUBDIRS) ;
 	CC = $(CC:J=" ") ;
-	CONFIGUREFLAGS += --host=i586-pc-haiku CC=\"$(CC)\" ;
+	#COMPILER_PATH = $(STUBDIRS[1]) :$(STUBDIRS[2-]) ;
+	CONFIGUREFLAGS += --host=i586-pc-haiku ;
+	CONFIGUREFLAGS += CC=\"$(CC)\" ;
 	CPPFLAGS += -I$(HEADERDIRS) $(CPPFLAGS) ;
+	#CPATH = $(HEADERDIRS[1]) :$(HEADERDIRS[2-]) ;
 	LDFLAGS += -L$(LIBDIRS) $(LDFLAGS) ;
+	#LIBRARY_PATH = $(LIBDIRS[1]) :$(LIBDIRS[2-]) ;
 	MAKEFLAGS += DESTDIR=$(DESTDIR) ;
 }
 CONFIGUREFLAGS += --prefix=$(PREFIX)
-	CPPFLAGS=\"$(CPPFLAGS:J=" ")\" XCFLAGS=\"$(CFLAGS:J=" ")\" CXXFLAGS=\"$(CXXFLAGS:J=" ")\" LDFLAGS=\"$(LDFLAGS:J=" ")\" ;
+	CPPFLAGS=\"$(CPPFLAGS:J=" ")\"
+	CFLAGS=\"$(CFLAGS:J=" ")\"
+	CXXFLAGS=\"$(CXXFLAGS:J=" ")\"
+	LDFLAGS=\"$(LDFLAGS:J=" ")\"
+	;
 
 SubInclude TOP dev-libs ;
 SubInclude TOP dev-util ;
 SubInclude TOP net-misc ;
 
+#COMPILER_PATH = $(COMPILER_PATH:J=:) ;
+#CPATH = $(CPATH:J=:) ;
+#LIBRARY_PATH = $(LIBRARY_PATH:J=:) ;
+PATH = $(PATH:J=:) ;
