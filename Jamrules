@@ -24,7 +24,9 @@ CONFIGURE ?= configure ;
 actions Configure
 {
 	mkdir -p "$(BUILDDIR)"
-	cd "$(BUILDDIR)" && \
+	cd "$(BUILDDIR)"
+	HAIKUCPPFLAGS=" $(HAIKU_CPPFLAGS) " && export HAIKUCPPFLAGS
+	HAIKULDFLAGS=" $(HAIKU_LDFLAGS) " && export HAIKULDFLAGS
 	PATH=$PATH:$(PATH) \
 	$(SRCDIR)/$(CONFIGURE) $(CONFIGUREFLAGS)
 }
@@ -33,20 +35,26 @@ MAKE ?= make ;
 
 actions Make
 {
-	cd "$(BUILDDIR)" && \
+	cd "$(BUILDDIR)"
+	HAIKUCPPFLAGS=" $(HAIKU_CPPFLAGS) " && export HAIKUCPPFLAGS
+	HAIKULDFLAGS=" $(HAIKU_LDFLAGS) " && export HAIKULDFLAGS
 	PATH=$PATH:$(PATH) \
 	$(MAKE) $(MAKEFLAGS)
 }
 actions ignore MakeIgnored
 {
-	cd "$(BUILDDIR)" && \
+	cd "$(BUILDDIR)"
+	HAIKUCPPFLAGS=" $(HAIKU_CPPFLAGS) " && export HAIKUCPPFLAGS
+	HAIKULDFLAGS=" $(HAIKU_LDFLAGS) " && export HAIKULDFLAGS
 	PATH=$PATH:$(PATH) \
 	$(MAKE) $(MAKEFLAGS)
 }
 
 actions MakeInstall
 {
-	cd "$(BUILDDIR)" && \
+	cd "$(BUILDDIR)"
+	HAIKUCPPFLAGS=" $(HAIKU_CPPFLAGS) " && export HAIKUCPPFLAGS
+	HAIKULDFLAGS=" $(HAIKU_LDFLAGS) " && export HAIKULDFLAGS
 	PATH=$PATH:$(PATH) \
 	$(MAKE) install $(MAKEFLAGS)
 }

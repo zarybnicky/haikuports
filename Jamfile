@@ -6,7 +6,7 @@ BUILDROOT = \$HOME ;
 include UserPortsConfig ;
 
 if $(OS) != HAIKU {
-	PATH += :$(DESTDIR)$(PREFIX)/bin ;
+	PATH += $(DESTDIR)$(PREFIX)/bin ;
 	local STUBDIRS =
 		$(HAIKUBUILDDIR)/objects/haiku/x86/release/system/glue
 		$(HAIKUBUILDDIR)/objects/haiku/x86/release/system/glue/arch/x86
@@ -46,13 +46,18 @@ if $(OS) != HAIKU {
 	CC = i586-pc-haiku-gcc ;
 	CC += -B$(STUBDIRS) ;
 	CC = $(CC:J=" ") ;
-	#COMPILER_PATH = $(STUBDIRS[1]) :$(STUBDIRS[2-]) ;
 	CONFIGUREFLAGS += --host=i586-pc-haiku ;
 	CONFIGUREFLAGS += CC=\"$(CC)\" ;
-	CPPFLAGS += -I$(HEADERDIRS) $(CPPFLAGS) ;
-	#CPATH = $(HEADERDIRS[1]) :$(HEADERDIRS[2-]) ;
-	LDFLAGS += -L$(LIBDIRS) $(LDFLAGS) ;
-	#LIBRARY_PATH = $(LIBDIRS[1]) :$(LIBDIRS[2-]) ;
+	HAIKU_CPPFLAGS += -isystem$(HAIKUBUILDDIR)/cross-tools/lib/gcc/i586-pc-haiku/4.3.3/include ;
+	HAIKU_CPPFLAGS += -isystem$(HAIKUBUILDDIR)/cross-tools/lib/gcc/i586-pc-haiku/4.3.3/include-fixed ;
+	HAIKU_CPPFLAGS += -isystem$(HEADERDIRS) ;
+	HAIKU_CPPFLAGS += -isysroot=$(DESTDIR)/ ;
+	#HAIKU_CPPFLAGS += --sysroot=$(DESTDIR)/ ;
+	#HAIKU_CPPFLAGS = $(HAIKU_CPPFLAGS:J=" ") ;
+	CPPFLAGS += \$HAIKUCPPFLAGS ;
+	HAIKU_LDFLAGS = -L$(LIBDIRS) ;
+	#HAIKU_LDFLAGS = $(HAIKU_LDFLAGS:J=" ") ;
+	LDFLAGS += \$HAIKULDFLAGS ;
 	MAKEFLAGS += DESTDIR=$(DESTDIR) ;
 }
 CONFIGUREFLAGS += --prefix=$(PREFIX)
@@ -66,7 +71,4 @@ SubInclude TOP dev-libs ;
 SubInclude TOP dev-util ;
 SubInclude TOP net-misc ;
 
-#COMPILER_PATH = $(COMPILER_PATH:J=:) ;
-#CPATH = $(CPATH:J=:) ;
-#LIBRARY_PATH = $(LIBRARY_PATH:J=:) ;
-PATH = $(PATH:J=:) ;
+PATH = $(PATH[1]):$(PATH[2-]) ;
