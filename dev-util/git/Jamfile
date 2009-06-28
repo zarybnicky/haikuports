@@ -14,12 +14,15 @@ NO_TCLTK=YesPlease
 NEEDS_LIBICONV=YesPlease
 PTHREAD_LIBS=
 CURLDIR=$(DESTDIR)$(PREFIX)
-PERL_PATH=/boot/common/bin/perl
+PERL_PATH=`which perl`
 CFLAGS=\"-g -O2 $(CPPFLAGS) $(CFLAGS) -I/boot/develop/headers/3rdparty -I$(DESTDIR)$(PREFIX)/include\"
 LDFLAGS=\"$(LDFLAGS:J=" ") -L$(DESTDIR)$(PREFIX)/lib -lnetwork -lbsd\"
 CC=\"$(CC)\"
 NO_OPENSSL=YesPlease #XXX
 ;
+if $(OS) != HAIKU {
+#	MAKEFLAGS on dev-util/git += NO_PERL_MAKEMAKER=YesPlease ;
+}
 
 MakeIgnored dev-util/git ;
 Make dev-util/git ;
