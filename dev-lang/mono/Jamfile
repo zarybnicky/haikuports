@@ -1,0 +1,12 @@
+SubDir TOP dev-lang mono ;
+
+#PortDepends dev-lang/mono : dev-util/pkgconfig ;
+
+CONFIGUREFLAGS on dev-lang/mono = $(CONFIGUREFLAGS)
+	--with-gc=none --with-glib=embedded --with-mcs-docs=no
+	--disable-nls --disable-shared-handles ;
+Configure dev-lang/mono ;
+
+Make dev-lang/mono ;
+
+MakeInstall dev-lang/mono ;

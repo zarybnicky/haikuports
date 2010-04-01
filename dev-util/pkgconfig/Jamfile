@@ -1,0 +1,8 @@
+SubDir TOP dev-util pkgconfig ;
+
+#CONFIGUREFLAGS on dev-util/pkgconfig = $(CONFIGUREFLAGS) ;
+Configure dev-util/pkgconfig ;
+
+Make dev-util/pkgconfig ;
+
+MakeInstall dev-util/pkgconfig ;
