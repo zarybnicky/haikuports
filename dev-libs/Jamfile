@@ -1,3 +1,4 @@
 SubDir TOP dev-libs ;
 
+SubInclude TOP dev-libs boehm-gc ;
 SubInclude TOP dev-libs expat ;

@@ -1,0 +1,10 @@
+SubDir TOP dev-libs boehm-gc ;
+
+CONFIGUREFLAGS on dev-libs/boehm-gc = $(CONFIGUREFLAGS)
+	--enable-threads=pthreads
+	;
+Configure dev-libs/boehm-gc ;
+
+Make dev-libs/boehm-gc ;
+
+#MakeInstall dev-libs/boehm-gc ;
