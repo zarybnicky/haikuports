@@ -65,6 +65,7 @@ CONFIGUREFLAGS += --prefix=$(PREFIX)
 	LDFLAGS=\"$(LDFLAGS:J=" ")\"
 	;
 
+SubInclude TOP dev-db ;
 SubInclude TOP dev-lang ;
 SubInclude TOP dev-libs ;
 SubInclude TOP dev-util ;

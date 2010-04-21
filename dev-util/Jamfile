@@ -2,3 +2,4 @@ SubDir TOP dev-util ;
 
 SubInclude TOP dev-util git ;
 SubInclude TOP dev-util pkgconfig ;
+SubInclude TOP dev-util subversion ;

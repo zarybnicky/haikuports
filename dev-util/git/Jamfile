@@ -1,7 +1,7 @@
 SubDir TOP dev-util git ;
 
-PortDepends dev-util/git : dev-libs/expat ;
-PortDepends dev-util/git : net-misc/curl ;
+#PortDepends dev-util/git : dev-libs/expat ;
+#PortDepends dev-util/git : net-misc/curl ;
 
 MAKEFLAGS on dev-util/git = $(MAKEFLAGS)
 prefix=$(PREFIX)

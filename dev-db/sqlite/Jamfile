@@ -1,0 +1,10 @@
+SubDir TOP dev-db sqlite ;
+
+CONFIGUREFLAGS on dev-db/sqlite = $(CONFIGUREFLAGS)
+#	--enable-threadsafe
+	;
+Configure dev-db/sqlite ;
+
+Make dev-db/sqlite ;
+
+MakeInstall dev-db/sqlite ;

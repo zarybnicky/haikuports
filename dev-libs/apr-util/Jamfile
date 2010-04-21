@@ -1,0 +1,12 @@
+SubDir TOP dev-libs apr-util ;
+
+CONFIGUREFLAGS on dev-libs/apr-util = $(CONFIGUREFLAGS)
+	--with-apr=/boot/common
+	--with-sqlite3=/boot/common
+	--with-expat=/boot/common --with-iconv=/boot/common
+	;
+Configure dev-libs/apr-util ;
+
+Make dev-libs/apr-util ;
+
+MakeInstall dev-libs/apr-util ;

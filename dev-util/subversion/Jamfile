@@ -1,0 +1,13 @@
+SubDir TOP dev-util subversion ;
+
+CONFIGUREFLAGS on dev-util/subversion = $(CONFIGUREFLAGS)
+	--with-apr=/boot/common
+	--with-apr-util=/boot/common
+	--with-neon=/boot/common
+	--with-sqlite=/boot/common
+	;
+Configure dev-util/subversion ;
+
+Make dev-util/subversion ;
+
+MakeInstall dev-util/subversion ;

@@ -1,3 +1,4 @@
 SubDir TOP net-misc ;
 
 SubInclude TOP net-misc curl ;
+SubInclude TOP net-misc neon ;

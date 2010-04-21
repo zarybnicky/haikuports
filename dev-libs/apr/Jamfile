@@ -1,0 +1,12 @@
+SubDir TOP dev-libs apr ;
+
+CONFIGUREFLAGS on dev-libs/apr = $(CONFIGUREFLAGS) --enable-threads
+#	--with-iconv=/boot/common
+#	--enable-experimental-libtool
+#	--without-libtool
+	;
+Configure dev-libs/apr ;
+
+Make dev-libs/apr ;
+
+MakeInstall dev-libs/apr ;

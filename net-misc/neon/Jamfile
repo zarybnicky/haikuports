@@ -1,0 +1,11 @@
+SubDir TOP net-misc neon ;
+
+CONFIGUREFLAGS on net-misc/neon = $(CONFIGUREFLAGS)
+#	--with-ssl
+	--enable-shared
+	;
+Configure net-misc/neon ;
+
+Make net-misc/neon ;
+
+MakeInstall net-misc/neon ;
